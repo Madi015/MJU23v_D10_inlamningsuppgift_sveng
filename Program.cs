@@ -29,6 +29,10 @@
                 {
                     Console.WriteLine("Goodbye!");
                 }
+                else if (command == "help")
+                {
+                    PrintHelpCommands();
+                }
                 else if (command == "load")
                 {
                     if(argument.Length == 2)
@@ -141,6 +145,21 @@
                 }
             }
             while (true);
+        }
+
+        private static void PrintHelpCommands()
+        {
+            Console.WriteLine("Here are all commands you can use: ");
+            Console.WriteLine("quit:                                end this program");
+            Console.WriteLine("load:                                load a file");
+            Console.WriteLine("load 'filename':                     load a specific file");
+            Console.WriteLine("list:                                list all words in the program");
+            Console.WriteLine("new :                                add a new word");
+            Console.WriteLine("new 'swedish word' ' english word':  add new word direkt");
+            Console.WriteLine("delete:                              the programm will ask for which english and swedish would will you delete.");
+            Console.WriteLine("delete 'swedísh word' 'english word':::delete a specific word direkt.");
+            Console.WriteLine("translate:                           translate a word");
+            Console.WriteLine("translate 'word':                    translate a specific word. ");
         }
     }
 }
