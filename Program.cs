@@ -127,7 +127,11 @@
                 string newEnglishWord = Console.ReadLine();
                 dictionary.Add(new SweEngGloss(newSwedishWord, newEnglishWord));
             }
-            else if (argument.Length >=3)
+            else if (argument.Length == 2)
+            {
+                Console.WriteLine("You missed to write one of words. please try agin.");
+            }
+            else if (argument.Length >3)
             {
                 Console.WriteLine("You have to write an english and a swedish word after 'new' not more.");
             }
