@@ -41,11 +41,7 @@
                 }
                 else if (command == "list")
                 {
-                    // TODO refactor the code here.
-                    foreach(SweEngGloss gloss in dictionary)
-                    {
-                        Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
-                    }
+                    PrintOutTheList();
                 }
                 else if (command == "new")
                 {
@@ -127,6 +123,14 @@
                 }
             }
             while (command != "quit");
+        }
+
+        private static void PrintOutTheList()
+        {
+            foreach (SweEngGloss gloss in dictionary)
+            {
+                Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
+            }
         }
 
         private static void LoadAll(string path, string defaultFile, string[] argument)
