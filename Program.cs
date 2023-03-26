@@ -127,6 +127,10 @@
                 string newEnglishWord = Console.ReadLine();
                 dictionary.Add(new SweEngGloss(newSwedishWord, newEnglishWord));
             }
+            else if (argument.Length >=3)
+            {
+                Console.WriteLine("You have to write an english and a swedish word after 'new' not more.");
+            }
         }
 
         private static void PrintOutTheList()
