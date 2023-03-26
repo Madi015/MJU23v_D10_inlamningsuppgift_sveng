@@ -145,6 +145,10 @@
                     LineReader(sr);
                 }
             }
+            else if (argument.Length >= 3)
+            {
+                Console.WriteLine("you have to write just 'load' and 'thefile name' without space.");
+            }
         }
 
         private static void LineReader(StreamReader sr)
