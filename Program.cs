@@ -131,24 +131,28 @@
 
         private static void LoadAll(string path, string defaultFile, string[] argument)
         {
-            if (argument.Length == 2)
+            try
             {
-                using (StreamReader sr = new StreamReader(path + argument[1]))
+                if (argument.Length == 2)
                 {
-                    LineReader(sr);
+                    using (StreamReader sr = new StreamReader(path + argument[1]))
+                    {
+                        LineReader(sr);
+                    }
+                }
+                else if (argument.Length == 1)
+                {
+                    using (StreamReader sr = new StreamReader(path + defaultFile))
+                    {
+                        LineReader(sr);
+                    }
+                }
+                else if (argument.Length >= 3)
+                {
+                    Console.WriteLine("you have to write just 'load' and 'thefile name' without space.");
                 }
             }
-            else if (argument.Length == 1)
-            {
-                using (StreamReader sr = new StreamReader(path + defaultFile))
-                {
-                    LineReader(sr);
-                }
-            }
-            else if (argument.Length >= 3)
-            {
-                Console.WriteLine("you have to write just 'load' and 'thefile name' without space.");
-            }
+            catch (System.IO.FileNotFoundException )   {Console.WriteLine("you have written uncorrect file name.");}
         }
 
         private static void LineReader(StreamReader sr)
