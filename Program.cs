@@ -18,7 +18,8 @@
         }
         static void Main(string[] args)
         {
-            string defaultFile = "..\\..\\..\\dict\\sweeng.lis";
+            string path = @"C:\Users\Salim\source\repos\MJU23v_D10_inlamningsuppgift_sveng\dict\";
+            string defaultFile = "sweeng.lis";
             Console.WriteLine("Welcome to the dictionary app!");
             string command;
             do
@@ -28,7 +29,6 @@
                 command = argument[0];
                 if (command == "quit")
                 {
-                    //FIXME the program doesn't end with comman quit.
                     Console.WriteLine("Goodbye!");
                 }
                 else if (command == "help")
@@ -37,37 +37,7 @@
                 }
                 else if (command == "load")
                 {
-                    // FIXME there are code duplicates have to be fixed in load.
-                    // TODO refactor the code here.
-                    if (argument.Length == 2)
-                    {
-                        using (StreamReader sr = new StreamReader(argument[1]))
-                        {
-                            dictionary = new List<SweEngGloss>(); // Empty it!
-                            string line = sr.ReadLine();
-                            while (line != null)
-                            {
-                                SweEngGloss gloss = new SweEngGloss(line);
-                                dictionary.Add(gloss);
-                                line = sr.ReadLine();
-                            }
-                        }
-                    }
-                    else if(argument.Length == 1)
-                    {
-                        using (StreamReader sr = new StreamReader(defaultFile))
-                        {
-
-                            dictionary = new List<SweEngGloss>(); // Empty it!
-                            string line = sr.ReadLine();
-                            while (line != null)
-                            {
-                                SweEngGloss gloss = new SweEngGloss(line);
-                                dictionary.Add(gloss);
-                                line = sr.ReadLine();
-                            }
-                        }
-                    }
+                    LoadAll(path, defaultFile, argument);
                 }
                 else if (command == "list")
                 {
@@ -157,6 +127,36 @@
                 }
             }
             while (command != "quit");
+        }
+
+        private static void LoadAll(string path, string defaultFile, string[] argument)
+        {
+            if (argument.Length == 2)
+            {
+                using (StreamReader sr = new StreamReader(path + argument[1]))
+                {
+                    LineReader(sr);
+                }
+            }
+            else if (argument.Length == 1)
+            {
+                using (StreamReader sr = new StreamReader(path + defaultFile))
+                {
+                    LineReader(sr);
+                }
+            }
+        }
+
+        private static void LineReader(StreamReader sr)
+        {
+            dictionary = new List<SweEngGloss>(); // Empty it!
+            string line = sr.ReadLine();
+            while (line != null)
+            {
+                SweEngGloss gloss = new SweEngGloss(line);
+                dictionary.Add(gloss);
+                line = sr.ReadLine();
+            }
         }
 
         private static void PrintHelpCommands()
