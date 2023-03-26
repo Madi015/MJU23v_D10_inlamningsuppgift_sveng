@@ -20,11 +20,12 @@
         {
             string defaultFile = "..\\..\\..\\dict\\sweeng.lis";
             Console.WriteLine("Welcome to the dictionary app!");
+            string command;
             do
             {
                 Console.Write("> ");
                 string[] argument = Console.ReadLine().Split();
-                string command = argument[0];
+                command = argument[0];
                 if (command == "quit")
                 {
                     //FIXME the program doesn't end with comman quit.
@@ -155,7 +156,7 @@
                     Console.WriteLine($"Unknown command: '{command}'");
                 }
             }
-            while (true);
+            while (command != "quit");
         }
 
         private static void PrintHelpCommands()
