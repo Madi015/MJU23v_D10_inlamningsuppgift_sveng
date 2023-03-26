@@ -152,7 +152,9 @@
                     Console.WriteLine("you have to write just 'load' and 'thefile name' without space.");
                 }
             }
-            catch (System.IO.FileNotFoundException )   {Console.WriteLine("you have written uncorrect file name.");}
+            catch (System.IO.FileNotFoundException ) { Console.WriteLine(argument[1] +" dosen't exsist");}
+            catch (System.IO.IOException) { Console.WriteLine("You have to write a correct file name, you cann't write a bad bath"); }
+
         }
 
         private static void LineReader(StreamReader sr)
