@@ -61,8 +61,16 @@
                             if (gloss.word_swe == argument[1] && gloss.word_eng == argument[2])
                                 index = i;
                         }
-                        Console.WriteLine($"Deleted {dictionary[index].word_eng} and {dictionary[index].word_swe}");
-                        dictionary.RemoveAt(index);
+                        if (index >=0)
+                        {
+                            Console.WriteLine($"Deleted {dictionary[index].word_eng} and {dictionary[index].word_swe}");
+                            dictionary.RemoveAt(index);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"These Words {argument[1]}  and  {argument[2]} didn't found in our list");
+                        }
+                        
 
                     }
                     else if (argument.Length == 1)
@@ -78,8 +86,15 @@
                             if (gloss.word_swe == deleteSwedishWord && gloss.word_eng == deleteEnglishWord)
                                 index = i;
                         }
-                        Console.WriteLine($"Deleted {dictionary[index].word_eng} and {dictionary[index].word_swe}");
-                        dictionary.RemoveAt(index);
+                        if (index >= 0)
+                        {
+                            Console.WriteLine($"Deleted {dictionary[index].word_eng} and {dictionary[index].word_swe}");
+                            dictionary.RemoveAt(index);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"These Words {deleteSwedishWord}  and  {deleteEnglishWord} didn't found in our list");
+                        }
                     }
                 }
                 else if (command == "translate")
