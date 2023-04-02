@@ -50,17 +50,20 @@
                 else if (command == "delete")
                 {
                     // TODO refactor code here
-                    // FIXME It had to confirm for us wich word deleted 
+                     
                     // FIXME it has to tell us if this word doesn't exsist. 
                     if (argument.Length == 3)
                     {
                         int index = -1;
-                        for (int i = 0; i < dictionary.Count; i++) {
+                        for (int i = 0; i < dictionary.Count; i++)
+                        {
                             SweEngGloss gloss = dictionary[i];
                             if (gloss.word_swe == argument[1] && gloss.word_eng == argument[2])
                                 index = i;
                         }
+                        Console.WriteLine($"Deleted {dictionary[index].word_eng} and {dictionary[index].word_swe}");
                         dictionary.RemoveAt(index);
+
                     }
                     else if (argument.Length == 1)
                     {
@@ -75,6 +78,7 @@
                             if (gloss.word_swe == deleteSwedishWord && gloss.word_eng == deleteEnglishWord)
                                 index = i;
                         }
+                        Console.WriteLine($"Deleted {dictionary[index].word_eng} and {dictionary[index].word_swe}");
                         dictionary.RemoveAt(index);
                     }
                 }
