@@ -51,7 +51,6 @@
                 {
                     // TODO refactor code here
                      
-                    // FIXME it has to tell us if this word doesn't exsist. 
                     if (argument.Length == 3)
                     {
                         int index = -1;
@@ -79,22 +78,7 @@
                         string deleteSwedishWord = Console.ReadLine();
                         Console.Write("Write word in English: ");
                         string deleteEnglishWord = Console.ReadLine();
-                        int index = -1;
-                        for (int i = 0; i < dictionary.Count; i++)
-                        {
-                            SweEngGloss gloss = dictionary[i];
-                            if (gloss.word_swe == deleteSwedishWord && gloss.word_eng == deleteEnglishWord)
-                                index = i;
-                        }
-                        if (index >= 0)
-                        {
-                            Console.WriteLine($"Deleted {dictionary[index].word_eng} and {dictionary[index].word_swe}");
-                            dictionary.RemoveAt(index);
-                        }
-                        else
-                        {
-                            Console.WriteLine($"These Words {deleteSwedishWord}  and  {deleteEnglishWord} didn't found in our list");
-                        }
+                        FindAndDeleteWords(deleteSwedishWord, deleteEnglishWord);
                     }
                 }
                 else if (command == "translate")
@@ -130,6 +114,26 @@
                 }
             }
             while (command != "quit");
+        }
+
+        private static void FindAndDeleteWords(string deleteSwedishWord, string deleteEnglishWord)
+        {
+            int index = -1;
+            for (int i = 0; i < dictionary.Count; i++)
+            {
+                SweEngGloss gloss = dictionary[i];
+                if (gloss.word_swe == deleteSwedishWord && gloss.word_eng == deleteEnglishWord)
+                    index = i;
+            }
+            if (index >= 0)
+            {
+                Console.WriteLine($"Deleted {dictionary[index].word_eng} and {dictionary[index].word_swe}");
+                dictionary.RemoveAt(index);
+            }
+            else
+            {
+                Console.WriteLine($"These Words {deleteSwedishWord}  and  {deleteEnglishWord} didn't found in our list");
+            }
         }
 
         private static void AddNewWords(string[] argument)
