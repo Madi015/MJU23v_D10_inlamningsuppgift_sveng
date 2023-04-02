@@ -49,37 +49,7 @@
                 }
                 else if (command == "delete")
                 {
-                    // TODO refactor code here
-                     
-                    if (argument.Length == 3)
-                    {
-                        int index = -1;
-                        for (int i = 0; i < dictionary.Count; i++)
-                        {
-                            SweEngGloss gloss = dictionary[i];
-                            if (gloss.word_swe == argument[1] && gloss.word_eng == argument[2])
-                                index = i;
-                        }
-                        if (index >=0)
-                        {
-                            Console.WriteLine($"Deleted {dictionary[index].word_eng} and {dictionary[index].word_swe}");
-                            dictionary.RemoveAt(index);
-                        }
-                        else
-                        {
-                            Console.WriteLine($"These Words {argument[1]}  and  {argument[2]} didn't found in our list");
-                        }
-                        
-
-                    }
-                    else if (argument.Length == 1)
-                    {
-                        Console.WriteLine("Write word in Swedish: ");
-                        string deleteSwedishWord = Console.ReadLine();
-                        Console.Write("Write word in English: ");
-                        string deleteEnglishWord = Console.ReadLine();
-                        FindAndDeleteWords(deleteSwedishWord, deleteEnglishWord);
-                    }
+                    Delete(argument);
                 }
                 else if (command == "translate")
                 {
@@ -114,6 +84,22 @@
                 }
             }
             while (command != "quit");
+        }
+
+        private static void Delete(string[] argument)
+        {
+            if (argument.Length == 3)
+            {
+                FindAndDeleteWords(argument[1], argument[2]);
+            }
+            else if (argument.Length == 1)
+            {
+                Console.WriteLine("Write word in Swedish: ");
+                string deleteSwedishWord = Console.ReadLine();
+                Console.Write("Write word in English: ");
+                string deleteEnglishWord = Console.ReadLine();
+                FindAndDeleteWords(deleteSwedishWord, deleteEnglishWord);
+            }
         }
 
         private static void FindAndDeleteWords(string deleteSwedishWord, string deleteEnglishWord)
