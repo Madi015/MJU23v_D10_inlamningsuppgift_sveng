@@ -56,31 +56,14 @@
                     // TODO refactor code
                     if (argument.Length == 2)
                     {
-                        int index = -1;
-                        foreach(SweEngGloss gloss in dictionary)
-                        {
-                            if (gloss.word_swe == argument[1])
-                            { Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}"); index++; }
-                            if (gloss.word_eng == argument[1])
-                            { Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}"); index++; }
-                        }
-                        if (index == -1)
-                        { Console.WriteLine("This word doesn't exsist in our list.");  }
+                        string wordToTranslate = argument[1];
+                        findAndTranslate(wordToTranslate);
                     }
                     else if (argument.Length == 1)
                     {
                         Console.WriteLine("Write word to be translated: ");
                         string wordToTranslate = Console.ReadLine();
-                        int index = -1;
-                        foreach (SweEngGloss gloss in dictionary)
-                        {
-                            if (gloss.word_swe == wordToTranslate)
-                            { Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}"); index++; }
-                            if (gloss.word_eng == wordToTranslate)
-                            { Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}"); index++; }
-                        }
-                        if (index == -1)
-                        { Console.WriteLine("This word doesn't exsist in our list."); }
+                        findAndTranslate(wordToTranslate);
                     }
                 }
                 else
@@ -89,6 +72,20 @@
                 }
             }
             while (command != "quit");
+        }
+
+        private static void findAndTranslate(string wordToTranslate)
+        {
+            int index = -1;
+            foreach (SweEngGloss gloss in dictionary)
+            {
+                if (gloss.word_swe == wordToTranslate)
+                { Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}"); index++; }
+                if (gloss.word_eng == wordToTranslate)
+                { Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}"); index++; }
+            }
+            if (index == -1)
+            { Console.WriteLine("This word doesn't exsist in our list."); }
         }
 
         private static void Delete(string[] argument)
