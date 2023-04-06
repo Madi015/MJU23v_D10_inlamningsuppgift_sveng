@@ -53,29 +53,34 @@
                 }
                 else if (command == "translate")
                 {
-                    // FIXME It has to tell us if the word doesn't exsist. 
                     // TODO refactor code
                     if (argument.Length == 2)
                     {
+                        int index = -1;
                         foreach(SweEngGloss gloss in dictionary)
                         {
                             if (gloss.word_swe == argument[1])
-                                Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
+                            { Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}"); index++; }
                             if (gloss.word_eng == argument[1])
-                                Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
+                            { Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}"); index++; }
                         }
+                        if (index == -1)
+                        { Console.WriteLine("This word doesn't exsist in our list.");  }
                     }
                     else if (argument.Length == 1)
                     {
                         Console.WriteLine("Write word to be translated: ");
                         string wordToTranslate = Console.ReadLine();
+                        int index = -1;
                         foreach (SweEngGloss gloss in dictionary)
                         {
                             if (gloss.word_swe == wordToTranslate)
-                                Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
+                            { Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}"); index++; }
                             if (gloss.word_eng == wordToTranslate)
-                                Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
+                            { Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}"); index++; }
                         }
+                        if (index == -1)
+                        { Console.WriteLine("This word doesn't exsist in our list."); }
                     }
                 }
                 else
