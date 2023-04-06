@@ -65,17 +65,22 @@
 
         private static void tanslate(string[] argument)
         {
-            if (argument.Length == 2)
+            try
             {
-                string wordToTranslate = argument[1];
-                findAndTranslate(wordToTranslate);
+                if (argument.Length == 2)
+                {
+                    string wordToTranslate = argument[1];
+                    findAndTranslate(wordToTranslate);
+                }
+                else if (argument.Length == 1)
+                {
+                    Console.WriteLine("Write word to be translated: ");
+                    string wordToTranslate = Console.ReadLine();
+                    findAndTranslate(wordToTranslate);
+                }
             }
-            else if (argument.Length == 1)
-            {
-                Console.WriteLine("Write word to be translated: ");
-                string wordToTranslate = Console.ReadLine();
-                findAndTranslate(wordToTranslate);
-            }
+            catch (System.NullReferenceException) { Console.WriteLine("You have to load all words first by writing \" load\" "); }
+
         }
 
         private static void findAndTranslate(string wordToTranslate)
@@ -94,18 +99,22 @@
 
         private static void Delete(string[] argument)
         {
-            if (argument.Length == 3)
+            try
             {
-                FindAndDeleteWords(argument[1], argument[2]);
+                if (argument.Length == 3)
+                {
+                    FindAndDeleteWords(argument[1], argument[2]);
+                }
+                else if (argument.Length == 1)
+                {
+                    Console.WriteLine("Write word in Swedish: ");
+                    string deleteSwedishWord = Console.ReadLine();
+                    Console.Write("Write word in English: ");
+                    string deleteEnglishWord = Console.ReadLine();
+                    FindAndDeleteWords(deleteSwedishWord, deleteEnglishWord);
+                }
             }
-            else if (argument.Length == 1)
-            {
-                Console.WriteLine("Write word in Swedish: ");
-                string deleteSwedishWord = Console.ReadLine();
-                Console.Write("Write word in English: ");
-                string deleteEnglishWord = Console.ReadLine();
-                FindAndDeleteWords(deleteSwedishWord, deleteEnglishWord);
-            }
+            catch (System.NullReferenceException) { Console.WriteLine("You have to load all words first by writing \" load\" "); }
         }
 
         private static void FindAndDeleteWords(string deleteSwedishWord, string deleteEnglishWord)
@@ -130,34 +139,44 @@
 
         private static void AddNewWords(string[] argument)
         {
-            if (argument.Length == 3)
+            try
             {
-                dictionary.Add(new SweEngGloss(argument[1], argument[2]));
+                if (argument.Length == 3)
+                {
+                    dictionary.Add(new SweEngGloss(argument[1], argument[2]));
+                }
+                else if (argument.Length == 1)
+                {
+                    Console.WriteLine("Write word in Swedish: ");
+                    string newSwedishWord = Console.ReadLine();
+                    Console.Write("Write word in English: ");
+                    string newEnglishWord = Console.ReadLine();
+                    dictionary.Add(new SweEngGloss(newSwedishWord, newEnglishWord));
+                }
+                else if (argument.Length == 2)
+                {
+                    Console.WriteLine("You missed to write one of words. please try agin.");
+                }
+                else if (argument.Length > 3)
+                {
+                    Console.WriteLine("You have to write an english and a swedish word after 'new' not more.");
+                }
             }
-            else if (argument.Length == 1)
-            {
-                Console.WriteLine("Write word in Swedish: ");
-                string newSwedishWord = Console.ReadLine();
-                Console.Write("Write word in English: ");
-                string newEnglishWord = Console.ReadLine();
-                dictionary.Add(new SweEngGloss(newSwedishWord, newEnglishWord));
-            }
-            else if (argument.Length == 2)
-            {
-                Console.WriteLine("You missed to write one of words. please try agin.");
-            }
-            else if (argument.Length >3)
-            {
-                Console.WriteLine("You have to write an english and a swedish word after 'new' not more.");
-            }
+            catch (System.NullReferenceException) { Console.WriteLine("You have to load all words first by writing \" load\" "); }
+
         }
 
         private static void PrintOutTheList()
         {
-            foreach (SweEngGloss gloss in dictionary)
+            try
             {
-                Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
+                foreach (SweEngGloss gloss in dictionary)
+                {
+                    Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
+                }
             }
+            catch (System.NullReferenceException) { Console.WriteLine("You have to load all words first by writing \" load\" "); }
+
         }
 
         private static void LoadAll(string path, string defaultFile, string[] argument)
@@ -185,6 +204,7 @@
             }
             catch (System.IO.FileNotFoundException ) { Console.WriteLine(argument[1] +" dosen't exsist");}
             catch (System.IO.IOException) { Console.WriteLine("You have to write a correct file name, you cann't write a bad bath"); }
+            catch (System.UnauthorizedAccessException) { Console.WriteLine("You cann't write '.'"); }
 
         }
 
