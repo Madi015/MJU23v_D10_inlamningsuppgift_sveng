@@ -53,18 +53,7 @@
                 }
                 else if (command == "translate")
                 {
-                    // TODO refactor code
-                    if (argument.Length == 2)
-                    {
-                        string wordToTranslate = argument[1];
-                        findAndTranslate(wordToTranslate);
-                    }
-                    else if (argument.Length == 1)
-                    {
-                        Console.WriteLine("Write word to be translated: ");
-                        string wordToTranslate = Console.ReadLine();
-                        findAndTranslate(wordToTranslate);
-                    }
+                    tanslate(argument);
                 }
                 else
                 {
@@ -72,6 +61,21 @@
                 }
             }
             while (command != "quit");
+        }
+
+        private static void tanslate(string[] argument)
+        {
+            if (argument.Length == 2)
+            {
+                string wordToTranslate = argument[1];
+                findAndTranslate(wordToTranslate);
+            }
+            else if (argument.Length == 1)
+            {
+                Console.WriteLine("Write word to be translated: ");
+                string wordToTranslate = Console.ReadLine();
+                findAndTranslate(wordToTranslate);
+            }
         }
 
         private static void findAndTranslate(string wordToTranslate)
